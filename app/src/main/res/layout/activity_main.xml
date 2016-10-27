@@ -11,6 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.marksinventions.project.MainActivity">
 
+    <!-- THIS IS A COMMENT FOR WEEK7's TEAM ACTIVITY - DELETE LATER ON. -->
     <Button
         android:layout_width="30dp"
         android:layout_height="wrap_content"
