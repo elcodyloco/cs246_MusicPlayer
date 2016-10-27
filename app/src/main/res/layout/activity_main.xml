@@ -20,7 +20,7 @@
         android:textAlignment="center"
         android:textSize="16dp"
         android:onClick="new"/>
-
+<!-- serene's comment is better!-->
     <GridView
         android:layout_width="match_parent"
         android:layout_height="0dp"
