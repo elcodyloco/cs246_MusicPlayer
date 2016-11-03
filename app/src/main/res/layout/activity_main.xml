@@ -10,16 +10,25 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.marksinventions.project.MainActivity">
-    
-<!-- mark's comment to be merged-->
-    <Button
-        android:layout_width="30dp"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="+"
-        android:textAlignment="center"
-        android:textSize="16dp"
-        android:onClick="new"/>
+        android:gravity="center">
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="90dp"
+            android:onClick="newProject"
+            android:text="New Project" />
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:onClick="newSet"
+            android:text="New Set" />
+    </LinearLayout>
 
     <GridView
         android:layout_width="match_parent"
@@ -32,24 +41,31 @@
         android:gravity="center">
 
         <Button
-            android:layout_width="100dp"
+            android:layout_width="70dp"
             android:layout_height="40dp"
             android:onClick="save"
             android:text="Save" />
 
         <Button
-            android:layout_width="100dp"
+            android:layout_width="70dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:onClick="load"
             android:text="Load" />
 
         <Button
-            android:layout_width="100dp"
+            android:layout_width="70dp"
             android:layout_height="40dp"
+            android:layout_marginRight="10dp"
             android:onClick="play"
             android:text="Play" />
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:onClick="stop"
+            android:text="Stop" />
 
     </LinearLayout>
 

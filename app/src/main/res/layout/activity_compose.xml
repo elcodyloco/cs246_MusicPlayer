@@ -129,19 +129,28 @@
         android:layout_gravity="bottom">
 
         <Button
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="40dp"
-            android:text="Add"/>
+            android:text="Add"
+            android:onClick="add"/>
         <Button
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:text="Cancel"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Cancel"
+            android:onClick="cancel"/>
         <Button
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="40dp"
-            android:text="Play Set"/>
+            android:layout_marginRight="10dp"
+            android:text="Test"
+            android:onClick="test"/>
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:text="stop"
+            android:onClick="stop"/>
 
     </LinearLayout>
 
