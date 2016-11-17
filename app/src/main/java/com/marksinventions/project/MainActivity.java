@@ -25,17 +25,19 @@ public class MainActivity extends AppCompatActivity {
         adapter = new SetsAdapter(this, setsList);
         setsGrid = (GridView) findViewById(R.id.setsGrid);
         setsGrid.setAdapter(adapter);
-        setsGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       setsGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                System.out.println("Click listener works. Set: " + i);
-               /* AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+               setIndex = i;
+               shortClick();
+              /* AlertDialog.Builder builder = new AlertDialog.Builder(getBaseContext());
                 builder.setMessage("Delete this set?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                setIndex = i;
-                                deleteSet();
+                                setsList.remove(setIndex);
+                                adapter.notifyDataSetChanged();
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                 AlertDialog dialog = builder.create();
-               dialog.show(); */
+               dialog.show();*/
             }
         });
                setsGrid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -55,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
                    @Override
                    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                        System.out.println("Long Click listener works. Set: " + i);
-                       longClick(i);
+                       setsList.remove(i);
+                       adapter.notifyDataSetChanged();
                /* AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("Delete this set?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -84,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                });
 
            }
+
 
 
     public  void deleteSet(int i){
@@ -117,15 +121,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void longClick(int i) {
+    public void shortClick() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Delete this set?")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
-                        deleteSet(i);
+                        setsList.remove(setIndex);
+                        adapter.notifyDataSetChanged();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
