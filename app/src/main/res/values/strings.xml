@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">Project</string>
+
+    <string name="playGuitar">PlayG</string>
+
+    <string-array name="spinner_guitar">
+        <item>sample1</item>
+        <item>sample2</item>
+    </string-array>
+
+    <string-array name="spinner_drums">
+        <item>sample1</item>
+        <item>sample2</item>
+    </string-array>
+
+    <string-array name="spinner_bass">
+        <item>sample1</item>
+        <item>sample2</item>
+    </string-array>
+
+    <string-array name="spinner_piano">
+        <item>sample1</item>
+        <item>sample2</item>
+    </string-array>
+
 </resources>
