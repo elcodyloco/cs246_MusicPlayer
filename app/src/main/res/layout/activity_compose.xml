@@ -10,32 +10,33 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="com.marksinventions.project.Compose">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center"
-    >
-<LinearLayout
-    android:layout_width="200dp"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <Spinner
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:id="@+id/drumSpinner" />
-    <TextView
-        android:layout_width="200dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Drums"/>
-</LinearLayout>
-    <Button
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="20dp"
-        android:text="Play"/>
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Spinner
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:id="@+id/drumSpinner" />
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Drums"/>
+        </LinearLayout>
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:text="Play"
+            android:id="@+id/playDrums" />
 
-</LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,7 +60,8 @@
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
-            android:text="Play"/>
+            android:text="Play"
+            android:id="@+id/playBass" />
 
     </LinearLayout>
 
@@ -85,7 +87,8 @@
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
-            android:text="Play"/>
+            android:text="Play"
+            android:id="@+id/playPiano" />
 
     </LinearLayout>
 
@@ -111,7 +114,8 @@
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
-            android:text="Play"/>
+            android:text="Play"
+            android:id="@+id/playGuitar" />
 
     </LinearLayout>
 
@@ -121,39 +125,39 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:layout_gravity="bottom">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_gravity="bottom">
 
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:text="Add"
-            android:onClick="add"/>
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="Cancel"
-            android:onClick="cancel"/>
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="10dp"
-            android:text="Test"
-            android:onClick="test"/>
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:text="stop"
-            android:onClick="stop"/>
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:text="Add"
+                android:onClick="add"/>
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Cancel"
+                android:onClick="cancel"/>
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="10dp"
+                android:text="Test"
+                android:onClick="test"/>
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:text="stop"
+                android:onClick="stop"/>
+
+        </LinearLayout>
+
 
     </LinearLayout>
-
-
-</LinearLayout>
 </LinearLayout>
