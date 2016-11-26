@@ -4,23 +4,40 @@
     <string name="playGuitar">PlayG</string>
 
     <string-array name="spinner_guitar">
-        <item>sample1</item>
-        <item>sample2</item>
+        <item>None</item>
+        <item>B Major</item>
+        <item>E Major</item>
     </string-array>
 
     <string-array name="spinner_drums">
-        <item>sample1</item>
-        <item>sample2</item>
+        <item>None</item>
+        <item>Bongo</item>
+        <item>Standard</item>
     </string-array>
 
     <string-array name="spinner_bass">
-        <item>sample1</item>
-        <item>sample2</item>
+        <item>None</item>
+        <item>Low</item>
+        <item>High</item>
     </string-array>
 
     <string-array name="spinner_piano">
-        <item>sample1</item>
-        <item>sample2</item>
+        <item>None</item>
+        <item>Cords</item>
+        <item>Synth Beat</item>
+    </string-array>
+
+    <string-array name="spinner_reps">
+        <item>1 Rep</item>
+        <item>2 Reps</item>
+        <item>3 Reps</item>
+        <item>4 Reps</item>
+        <item>5 Reps</item>
+        <item>6 Reps</item>
+        <item>7 Reps</item>
+        <item>8 Reps</item>
+        <item>9 Reps</item>
+        <item>10 Reps</item>
     </string-array>
 
 </resources>
