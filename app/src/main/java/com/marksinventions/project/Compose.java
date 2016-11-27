@@ -3,6 +3,7 @@
 package com.marksinventions.project;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,7 +16,7 @@ import static com.marksinventions.project.MainActivity.setsList;
 
 public class Compose extends AppCompatActivity {
     final String ARRAY = "Array size: ";
-
+    MediaPlayer mediaPlayer;
     boolean edit = false;
     int currentSet; // holds int resource for the music files
     int resDrums; // holds int resource for the selected music file
@@ -33,20 +34,18 @@ public class Compose extends AppCompatActivity {
     Spinner sDrums;
     Spinner sPiano;
     Spinner sReps;
+    private MediaPlayer.OnCompletionListener completionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            releaseMediaPlayer();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
-
-        bPlay = (Button) findViewById(R.id.playGuitar);
-
-        bPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
 
         sGuitar = (Spinner) findViewById(R.id.guitarSpinner);
         sBass = (Spinner) findViewById(R.id.bassSpinner);
@@ -58,7 +57,6 @@ public class Compose extends AppCompatActivity {
         gAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sGuitar.setAdapter(gAdapter);
         sGuitar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
@@ -73,8 +71,8 @@ public class Compose extends AppCompatActivity {
                     case 2:
                         resGuitar = R.raw.ambiant_e_maj;
                         posGuitar = 2;
+                        break;
                 }
-
             }
 
             @Override
@@ -184,7 +182,7 @@ public class Compose extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        if (intent.getExtras() != null) { // check if this is an edit, not a new set
+        if (intent.getExtras() != null) { //  if true, this is an edit, not a new set
             int currentSet = intent.getIntExtra("index", 0); // find the set to be edited
             edit = intent.getBooleanExtra("index", true); // set edit to true so save() will not create a new set
             Set tempSet = setsList.get(currentSet); // create a copy of the current set
@@ -198,16 +196,42 @@ public class Compose extends AppCompatActivity {
     }// end of onCreate
 
     public void drums(View view) {
+        releaseMediaPlayer();
+        if (resDrums != -1) {
+            mediaPlayer = MediaPlayer.create(this, resDrums);
+            mediaPlayer.start();
+            mediaPlayer.setOnCompletionListener(completionListener);
+        }
     }
 
     public void bass(View view) {
+        releaseMediaPlayer();
+        if (resBass != -1) {
+            mediaPlayer = MediaPlayer.create(this, resBass);
+            mediaPlayer.start();
+            mediaPlayer.setOnCompletionListener(completionListener);
+        }
     }
 
     public void piano(View view) {
+        System.out.println("Guitar resource " + resGuitar);
+        releaseMediaPlayer();
+        if (resPiano != -1) {
+            mediaPlayer = MediaPlayer.create(this, resPiano);
+            mediaPlayer.start();
+            mediaPlayer.setOnCompletionListener(completionListener);
+        }
     }
 
     public void guitar(View view) {
+        releaseMediaPlayer();
+        if (resGuitar != -1) {
+            mediaPlayer = MediaPlayer.create(this, resGuitar);
+            mediaPlayer.start();
+            mediaPlayer.setOnCompletionListener(completionListener);
+        }
     }
+
 
     public void save(View view) {
         Set tempSet;
@@ -230,18 +254,37 @@ public class Compose extends AppCompatActivity {
 
         setsList.set(currentSet, tempSet); // replace the current set with tempSet
 
-        Intent intent = new Intent(this, MainActivity.class); // go back to main
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        finish();
 
     }
 
+    public void finish() {
+        Intent intent = new Intent(this, MainActivity.class); // go back to main
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
     public void cancel(View view) {
+        finish();
     }
 
     public void test(View view) {
     }
 
-    public void stop(View view) {
+
+    private void releaseMediaPlayer() {
+        // If the media player is not null, then it may be currently playing a sound.
+        if (mediaPlayer != null) {
+            // Regardless of the current state of the media player, release its resources
+            // because we no longer need it.
+            mediaPlayer.release();
+
+            // Set the media player back to null. For our code, we've decided that
+            // setting the media player to null is an easy way to tell that the media player
+            // is not configured to play an audio file at the moment.
+            mediaPlayer = null;
+        }
     }
+
+
 }
