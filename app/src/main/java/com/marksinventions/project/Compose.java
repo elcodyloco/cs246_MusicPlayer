@@ -3,19 +3,24 @@
 package com.marksinventions.project;
 
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 
 import static com.marksinventions.project.MainActivity.setsList;
 
 public class Compose extends AppCompatActivity {
     final String ARRAY = "Array size: ";
+    MediaPlayer drumPlayer;
+    MediaPlayer bassPlayer;
+    MediaPlayer pianoPlayer;
+    MediaPlayer guitarPlayer;
     MediaPlayer mediaPlayer;
     boolean edit = false;
     int currentSet; // holds int resource for the music files
@@ -28,12 +33,19 @@ public class Compose extends AppCompatActivity {
     int posBass;
     int posGuitar;
     int posPiano;
-    Button bPlay;
+
+    int drumId = 0;
+    int bassId = 0;
+    int pianoId = 0;
+    int guitarId = 0;
+
     Spinner sGuitar;
     Spinner sBass;
     Spinner sDrums;
     Spinner sPiano;
     Spinner sReps;
+    SoundPool testingPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
+    ;
     private MediaPlayer.OnCompletionListener completionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
@@ -235,12 +247,12 @@ public class Compose extends AppCompatActivity {
 
     public void save(View view) {
         Set tempSet;
-        if (edit == false) { // new set. create set, add it to the arrayList and set it as the current set.
+        if (!edit) { // new set. create set, add it to the arrayList and set it as the current set.
             tempSet = new Set();
             setsList.add(tempSet);
             currentSet = setsList.size() - 1;
         }
-        tempSet = MainActivity.setsList.get(currentSet); // create a copy of the current set
+        tempSet = setsList.get(currentSet); // create a copy of the current set
 
         tempSet.setDrums(resDrums); // set all the values
         tempSet.setD_pos(posDrums);
@@ -269,6 +281,19 @@ public class Compose extends AppCompatActivity {
     }
 
     public void test(View view) {
+
+
+            if (resDrums != -1) drumPlayer = MediaPlayer.create(this, resDrums);
+            if (resBass != -1) bassPlayer = MediaPlayer.create(this, resBass);
+            if (resPiano != -1) pianoPlayer = MediaPlayer.create(this, resPiano);
+            if (resGuitar != -1) guitarPlayer = MediaPlayer.create(this, resGuitar);
+
+            if (resDrums != -1) drumPlayer.start();
+            if (resBass != -1) bassPlayer.start();
+            if (resPiano != -1) pianoPlayer.start();
+            if (resGuitar != -1) guitarPlayer.start();
+
+
     }
 
 
@@ -285,6 +310,5 @@ public class Compose extends AppCompatActivity {
             mediaPlayer = null;
         }
     }
-
 
 }
