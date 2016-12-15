@@ -3,14 +3,18 @@
 package com.marksinventions.project;
 
 import android.content.Intent;
+import android.media.SoundPool;
+import android.media.SoundPool.Builder;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import java.util.HashMap;
 
 import static com.marksinventions.project.MainActivity.setsList;
 
@@ -29,6 +33,10 @@ public class Compose extends AppCompatActivity {
     int posGuitar;
     int posPiano;
     Button bPlay;
+    SoundPool InstrumentPool;
+    HashMap<Integer, Integer> soundPoolMap;
+    int soundID = 1;
+
     Spinner sGuitar;
     Spinner sBass;
     Spinner sDrums;
@@ -46,6 +54,10 @@ public class Compose extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
+            InstrumentPool = new SoundPool.Builder()
+                    .setMaxStreams(10)
+                    .build();
+        soundPoolMap = new HashMap<Integer, Integer>();
 
         sGuitar = (Spinner) findViewById(R.id.guitarSpinner);
         sBass = (Spinner) findViewById(R.id.bassSpinner);
@@ -268,7 +280,22 @@ public class Compose extends AppCompatActivity {
         finish();
     }
 
-    public void test(View view) {
+    public void play(View view){
+
+        int drumId = 0;
+        int bassId = 0;
+        int pianoId = 0;
+        int guitarId = 0;
+
+        if (resDrums != -1) drumId = InstrumentPool.load(this, resDrums, 0);
+        if (resBass != -1) bassId = InstrumentPool.load(this, resBass, 0);
+        if (resPiano != -1) pianoId = InstrumentPool.load(this, resPiano, 0);
+        if (resGuitar != -1) guitarId = InstrumentPool.load(this, resGuitar, 0);
+
+        if (resDrums != -1) drumId = InstrumentPool.play(drumId, 1, 1, 0, resReps, 1);
+        if (resBass != -1) bassId = InstrumentPool.play(bassId, 1, 1, 0, resReps, 1);
+        if (resPiano != -1) pianoId = InstrumentPool.play(pianoId, 1, 1, 0, resReps, 1);
+        if (resGuitar != -1) guitarId = InstrumentPool.play(guitarId, 1, 1, 0, resReps, 1);
     }
 
 
