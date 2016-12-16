@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.media.SoundPool.Builder;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
 
 import static com.marksinventions.project.MainActivity.setsList;
 
@@ -33,6 +36,8 @@ public class Compose extends AppCompatActivity {
     int posBass;
     int posGuitar;
     int posPiano;
+    SoundPool InstrumentPool;
+
 
     int drumId = 0;
     int bassId = 0;
@@ -44,8 +49,8 @@ public class Compose extends AppCompatActivity {
     Spinner sDrums;
     Spinner sPiano;
     Spinner sReps;
-    SoundPool testingPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
-    ;
+
+
     private MediaPlayer.OnCompletionListener completionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
@@ -280,22 +285,53 @@ public class Compose extends AppCompatActivity {
         finish();
     }
 
-    public void test(View view) {
+    public void play(View view) {
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            InstrumentPool = new SoundPool.Builder()
+                    .setMaxStreams(4)
+                    .build();
+        }
 
-            if (resDrums != -1) drumPlayer = MediaPlayer.create(this, resDrums);
-            if (resBass != -1) bassPlayer = MediaPlayer.create(this, resBass);
-            if (resPiano != -1) pianoPlayer = MediaPlayer.create(this, resPiano);
-            if (resGuitar != -1) guitarPlayer = MediaPlayer.create(this, resGuitar);
+        int drumId = 0;
+        int bassId = 0;
+        int pianoId = 0;
+        int guitarId = 0;
 
-            if (resDrums != -1) drumPlayer.start();
-            if (resBass != -1) bassPlayer.start();
-            if (resPiano != -1) pianoPlayer.start();
-            if (resGuitar != -1) guitarPlayer.start();
+        if (resDrums != -1) drumId = InstrumentPool.load(this, resDrums, 0);
+        if (resBass != -1) bassId = InstrumentPool.load(this, resBass, 0);
+        if (resPiano != -1) pianoId = InstrumentPool.load(this, resPiano, 0);
+        if (resGuitar != -1) guitarId = InstrumentPool.load(this, resGuitar, 0);
 
-
+        if (resDrums != -1) drumId = InstrumentPool.play(drumId, 1, 1, 0, resReps, 1);
+        if (resBass != -1) bassId = InstrumentPool.play(bassId, 1, 1, 0, resReps, 1);
+        if (resPiano != -1) pianoId = InstrumentPool.play(pianoId, 1, 1, 0, resReps, 1);
+        if (resGuitar != -1) guitarId = InstrumentPool.play(guitarId, 1, 1, 0, resReps, 1);
     }
 
+    public boolean isDrumLoaded = false;
+    public boolean isBassLoaded = false;
+    public boolean isPianoLoaded = false;
+    public boolean isGuitarLoaded = false;
+    
+    public void onLoadComplete(SoundPool InstrumentPool, int sampleId, int status){
+    if (status == 0) {
+        switch (sampleId) {
+            case 2:
+                isDrumLoaded = true;
+                break;
+            case 3:
+                isBassLoaded = true;
+                break;
+            case 4:
+                isPianoLoaded = true;
+                break;
+            case 5:
+                isGuitarLoaded = true;
+                break;
+        }
+    }
+}
 
     private void releaseMediaPlayer() {
         // If the media player is not null, then it may be currently playing a sound.
